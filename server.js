@@ -1,8 +1,18 @@
 var sh = require('execSync');
 var express = require('express');
 var app = express();
+var config = require('./config.json');
 
 app.use(express.static('public'));
+app.set('view engine', 'ejs');
+
+app.get('/', function(req, res) {
+  res.render('dashboard', { config:config });
+});
+
+app.get('/config', function(req, res) {
+  res.send(config);
+});
 
 app.get('/switch/:pin/:state', function(req, res) {
   var pin = req.params.pin;

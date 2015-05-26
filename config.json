@@ -1,0 +1,30 @@
+{
+  "zone": "Backyard",
+  "devices": [
+    {
+      "name": "BBQ flood light",
+      "type": "switch",
+      "options": {
+        "pin": 7
+      }
+    },{
+      "name": "Garden flood light",
+      "type": "switch",
+      "options": {
+        "pin": 8
+      }
+    },{
+      "name": "Path lights",
+      "type": "switch",
+      "options": {
+        "pin": 14
+      }
+    },{
+      "name": "Patio lights",
+      "type": "switch",
+      "options": {
+        "pin": 15
+      }
+    }
+  ]
+}

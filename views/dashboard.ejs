@@ -5,14 +5,21 @@
       * { font-size: 1.1rem; }
       table { border:solid 0.05rem black; padding: 0.5em; background-color: #ddd; }
       td { padding: 0.5rem; border: solid 0.05rem lightgray; background-color: #f6f6f6; }
+      caption { padding: 0.5em; }
     </style>
   </head>
   <body>
     <table>
-      <tr><td>7</td><td><a href="#" onclick="turnOn(7);">on</a></td><td><a href="#" onclick="turnOff(7);">off</a></td></tr>
-      <tr><td>8</td><td><a href="#" onclick="turnOn(8);">on</a></td><td><a href="#" onclick="turnOff(8);">off</a></td></tr>
-      <tr><td>14</td><td><a href="#" onclick="turnOn(14);">on</a></td><td><a href="#" onclick="turnOff(14);">off</a></td></tr>
-      <tr><td>15</td><td><a href="#" onclick="turnOn(15);">on</a></td><td><a href="#" onclick="turnOff(15);">off</a></td></tr>
+<caption><%= config.zone %></caption>
+<% for(var i in config.devices) {
+     var device = config.devices[i];
+ %>
+  <tr> 
+  <td><%= device.name %></td>
+  <td><a href="#" onclick="turnOn(<%= device.options.pin %>);">on</a></td>
+  <td><a href="#" onclick="turnOff(<%= device.options.pin %>);">off</a></td>
+  </tr>
+<% } %>
     </table>
   </body>
 
