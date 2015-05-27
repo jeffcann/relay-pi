@@ -19,14 +19,13 @@ app.get('/switch/:pin/:state', function(req, res) {
   var state = (req.params.state == 'on');
 
   if(state === true) {
-    sh.exec('./turnon.sh ' + pin);
+    sh.exec('./script/turnon.sh ' + pin);
     res.send({status:'ok', pin:pin, state:'on'});
   } else {
-    sh.exec('./turnoff.sh ' + pin);
+    sh.exec('./script/turnoff.sh ' + pin);
     res.send({status:'ok', pin:pin, state:'off'});
   }
 });
-
 
 var server = app.listen(3000, function () {
   var host = server.address().address;

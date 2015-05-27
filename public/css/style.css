@@ -1,0 +1,19 @@
+* {
+    font-size: 1.1rem;
+}
+
+table {
+    border: solid 0.05rem black;
+    padding: 0.5em;
+    background-color: #ddd;
+}
+
+td {
+    padding: 0.5rem;
+    border: solid 0.05rem lightgray;
+    background-color: #f6f6f6;
+}
+
+caption {
+    padding: 0.5em;
+}

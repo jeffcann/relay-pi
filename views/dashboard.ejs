@@ -10,16 +10,14 @@
   </head>
   <body>
     <table>
-<caption><%= config.zone %></caption>
-<% for(var i in config.devices) {
-     var device = config.devices[i];
- %>
-  <tr> 
-  <td><%= device.name %></td>
-  <td><a href="#" onclick="turnOn(<%= device.options.pin %>);">on</a></td>
-  <td><a href="#" onclick="turnOff(<%= device.options.pin %>);">off</a></td>
-  </tr>
-<% } %>
+        <caption><%= config.zone %></caption>
+        <% for(var i in config.devices) { var device = config.devices[i];  %>
+          <tr>
+              <td><%= device.name %></td>
+              <td><a href="#" onclick="turnOn(<%= device.options.pin %>);">on</a></td>
+              <td><a href="#" onclick="turnOff(<%= device.options.pin %>);">off</a></td>
+          </tr>
+        <% } %>
     </table>
   </body>
 
