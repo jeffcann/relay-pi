@@ -12,7 +12,6 @@
     "execSync": "^1.0.2",
     "execsync": "0.0.6",
     "express": "^4.12.3",
-    "pi-gpio": "0.0.7",
     "rpi-gpio": "^0.5.1"
   }
 }

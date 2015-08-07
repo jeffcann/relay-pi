@@ -1,65 +1,49 @@
-var gpio = require("pi-gpio");
+var fs = require('fs');
 
-var pins = [16, 18];
+exports.init = function() {
+    [0, 1, 4, 7, 8, 9, 10, 11, 14, 15, 17, 18, 21, 22, 23, 24, 25].forEach(initPin);
+};
 
-function open(pin, callback) {
-  console.log("opening pin " + pin);
-
-  gpio.open(pin, "output", function(err) {
-    if(err) {
-      console.log("could not open gpio " + pin);
-    } else {
-      callback();
+exports.initPin = function(pin) {
+    if(!exports.isPinOpen(pin)) {
+        exports.openPin(pin);
+        exports.setPinDirectionOut(pin);
+        exports.turnOff(pin);
     }
-  });
-}
+};
 
-function close(pin) {
-  gpio.close(pin);
-}
+exports.turnOn = function(pin) {
+    exports.writePin(pin, 1);
+};
 
-function init() {
-  for(var idx in pins) {
-    var pin = pins[idx];
-    open(pin, function() { 
-      setInterval(function() { blink(pin); }, 2000);
-    });
-  }
-}
+exports.turnOff = function(pin) {
+    exports.writePin(pin, 0);
+};
 
-function turnOn(pin, callback) {
-  console.log("turn on pin " + pin);
-  gpio.open(pin, "output", callback);
-//  gpio.write(pin, 1, callback);
-}
+exports.writePin = function(pin, value) {
+    f.writeFileSync('/sys/class/gpio/gpio' + pin + '/value', value);
+};
 
-function turnOff(pin, callback) {
-  console.log("turn off pin " + pin);
-  gpio.open(pin, "input", callback);
-//  gpio.write(pin, 0, callback);
-}
+exports.readPin = function(pin) {
+    return fs.readFileSync('/sys/class/gpio/gpio' + pin + '/value');
+};
 
-function blink(pin, callback) {
-  console.log("blink pin " + pin);
+exports.isPinOpen = function(pin) {
+    return fs.existsSync('/sys/class/gpio/gpio' + pin);
+};
 
-  turnOn(pin, function(err) {
-    if(err) {
-      console.log(err);
-    } else {
-      setTimeout(function() { 
-        turnOff(pin, callback);
-      }, 1000);
-    }
-  });
-}
+exports.setPinDirectionOut = function(pin) {
+    f.writeFileSync('/sys/class/gpio/gpio' + pin + '/direction', 'out');
+};
 
-process.on('exit', function() {
-  for(var idx in pins) {
-    console.log("closing pin " + pins[idx]);
-    close(pins[idx]);
-  }  
-});
+exports.setPinDirectionIn = function(pin) {
+    f.writeFileSync('/sys/class/gpio/gpio' + pin + '/direction', 'in');
+};
 
-init();
+exports.openPin = function(pin) {
+    f.writeFileSync('/sys/class/gpio/export', pin);
+};
 
-
+exports.closePin = function(pin) {
+    f.writeFileSync('/sys/class/gpio/unexport', pin);
+};
