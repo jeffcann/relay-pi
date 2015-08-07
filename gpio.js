@@ -1,7 +1,7 @@
-var fs = require('fs');
+var f = require('fs');
 
 exports.init = function() {
-    [0, 1, 4, 7, 8, 9, 10, 11, 14, 15, 17, 18, 21, 22, 23, 24, 25].forEach(initPin);
+    [0, 1, 4, 7, 8, 9, 10, 11, 14, 15, 17, 18, 21, 22, 23, 24, 25].forEach(exports.initPin);
 };
 
 exports.initPin = function(pin) {
@@ -25,11 +25,11 @@ exports.writePin = function(pin, value) {
 };
 
 exports.readPin = function(pin) {
-    return fs.readFileSync('/sys/class/gpio/gpio' + pin + '/value');
+    return f.readFileSync('/sys/class/gpio/gpio' + pin + '/value');
 };
 
 exports.isPinOpen = function(pin) {
-    return fs.existsSync('/sys/class/gpio/gpio' + pin);
+    return f.existsSync('/sys/class/gpio/gpio' + pin);
 };
 
 exports.setPinDirectionOut = function(pin) {
